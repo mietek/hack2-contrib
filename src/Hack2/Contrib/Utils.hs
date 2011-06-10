@@ -23,7 +23,8 @@ empty_app = return def
 
 -- | usage: app.use [content_type, cache]
 use :: [Middleware] -> Middleware
-use = reduce (<<<)
+use [] = id
+use xs = xs.reduce (<<<)
 
 -- use the get / put helper to deal with headers
 put :: (Eq a) => a -> b -> [(a, b)] -> [(a, b)]
