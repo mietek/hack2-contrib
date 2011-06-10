@@ -14,7 +14,6 @@ homepage:             http://github.com/nfjinjing/hack2-contrib
 data-files:           readme.md, changelog.md
 
 library
-  ghc-options: -Wall
   build-depends: 
                     base >=4 && < 5
                   , cgi
