@@ -1,4 +1,4 @@
-Name:                 hack22-contrib
+Name:                 hack2-contrib
 Version:              2010.9.28
 Build-type:           Simple
 Synopsis:             Hack2 contrib
@@ -10,7 +10,7 @@ Maintainer:           Jinjing Wang <nfjinjing@gmail.com>
 Build-Depends:        base
 Cabal-version:        >= 1.2
 category:             Web
-homepage:             http://github.com/nfjinjing/hack22-contrib
+homepage:             http://github.com/nfjinjing/hack2-contrib
 data-files:           readme.md, changelog.md
 
 library
