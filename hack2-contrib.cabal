@@ -10,10 +10,11 @@ Maintainer:           Jinjing Wang <nfjinjing@gmail.com>
 Build-Depends:        base
 Cabal-version:        >= 1.2
 category:             Web
-homepage:             http://github.com/nfjinjing/hack2-contrib
+homepage:             https://github.com/nfjinjing/hack2-contrib
 data-files:           readme.md, changelog.md
 
 library
+
   build-depends: 
                     base >=4 && < 5
                   , cgi
@@ -34,6 +35,7 @@ library
                   , ansi-wl-pprint
                   
   hs-source-dirs: src/
+  
   exposed-modules:  
                     
                     Hack2.Contrib.Constants
@@ -43,7 +45,6 @@ library
                     Hack2.Contrib.Middleware.ContentLength
                     Hack2.Contrib.Middleware.ContentType
                     Hack2.Contrib.Middleware.Debug
-                    -- Hack2.Contrib.Middleware.ETag
                     Hack2.Contrib.Middleware.File
                     Hack2.Contrib.Middleware.Head
                     Hack2.Contrib.Middleware.Inspect
