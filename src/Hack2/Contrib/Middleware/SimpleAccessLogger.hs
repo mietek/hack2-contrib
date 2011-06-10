@@ -8,7 +8,7 @@ import Hack2
 import Hack2.Contrib.Request hiding (referer)
 import Hack2.Contrib.Constants
 import Hack2.Contrib.Utils
-import Air.Extra (simple_time_format, purify)
+import Hack2.Contrib.AirBackports
 import Air.Env
 import Data.Maybe
 import Prelude ()

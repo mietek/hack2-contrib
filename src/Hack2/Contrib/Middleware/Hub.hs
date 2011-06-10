@@ -9,10 +9,11 @@ module Hack2.Contrib.Middleware.Hub where
 import Data.Maybe
 import Data.Time
 import Air
-import Air.Extra
 import Prelude hiding ((.), (^), (>), (+), (-))
 import Text.PrettyPrint.ANSI.Leijen
 import Text.Printf
+import Hack2.Contrib.Utils
+import Hack2.Contrib.AirBackports
 
 #ifdef UNIX
 import System.Posix.Process (getProcessID)

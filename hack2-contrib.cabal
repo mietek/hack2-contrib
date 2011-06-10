@@ -29,10 +29,10 @@ library
                   , data-default >= 0.2
                   , time
                   , air >= 2011.6.11
-                  , air-extra >= 2011.6.11
                   , hack2 >= 2009.10.30
                   , utf8-string
                   , ansi-wl-pprint
+                  , regexpr
                   
   hs-source-dirs: src/
   
@@ -57,12 +57,13 @@ library
                     Hack2.Contrib.Middleware.URLMap
                     Hack2.Contrib.Middleware.IOConfig
                     Hack2.Contrib.Middleware.UserMime
-                    Hack2.Contrib.Middleware.UTF8Body
+                    -- Hack2.Contrib.Middleware.UTF8Body
                     Hack2.Contrib.Middleware.Cascade
                     Hack2.Contrib.Mime
                     Hack2.Contrib.Request
                     Hack2.Contrib.Response
                     Hack2.Contrib.Utils
+                    Hack2.Contrib.AirBackports
 
 
 

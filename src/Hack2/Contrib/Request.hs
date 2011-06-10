@@ -9,11 +9,12 @@ import Hack2 hiding (body)
 import Hack2.Contrib.Constants
 import Hack2.Contrib.Utils
 import Air.Env
-import Air.Extra
 import Network.CGI.Cookie
 import Network.CGI.Protocol
 import Prelude ()
 import qualified Data.ByteString.Lazy.Char8 as B
+import Hack2.Contrib.AirBackports
+
 
 body :: Env -> ByteString
 body = hack_input
@@ -35,9 +36,10 @@ media_type env = case env.content_type.B.unpack.split "\\s*[;,]\\s*" of
   [] -> ""
   x:_ -> x.lower.B.pack
 
+
 media_type_params :: Env -> [(ByteString, ByteString)]
 media_type_params env
-  | env.content_type.B.null = []
+  | env.content_type.B.unpack.empty = []
   | otherwise = 
       env
         .content_type
@@ -56,9 +58,10 @@ content_charset env = env.media_type_params.lookup "charset" .fromMaybe ""
 host :: Env -> ByteString
 host env = env.httpHeaders.get _Host .fromMaybe (env.server_name) .B.unpack.gsub ":\\d+\\z" "" .B.pack
 
+
 params :: Env -> [(ByteString, ByteString)]
 params env =
-  if env.query_string.B.null
+  if env.query_string.B.unpack.empty
     then []
     else env.query_string.B.unpack.formDecode.map_both B.pack
 
@@ -90,7 +93,7 @@ cookies env = case env.httpHeaders.get _Cookie of
 
 fullpath :: Env -> ByteString
 fullpath env = 
-  if env.query_string.B.null 
+  if env.query_string.B.unpack.empty 
     then env.path 
     else env.path + "?" + env.query_string
 

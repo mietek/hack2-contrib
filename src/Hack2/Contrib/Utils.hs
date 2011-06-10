@@ -16,6 +16,7 @@ import Prelude hiding ((.), (^), (>), lookup, (+), (/), (-))
 import System.Locale (defaultTimeLocale)
 import qualified Data.ByteString.Lazy.Char8 as B
 import qualified Data.Map as M
+import Hack2.Contrib.AirBackports
 
 empty_app :: Application
 empty_app = return def
@@ -68,15 +69,9 @@ unescape_uri = unEscapeString
 show_status_message :: Int -> Maybe ByteString
 show_status_message x = status_code.M.lookup x
 
-now :: IO UTCTime
-now = getCurrentTime
 
 httpdate :: UTCTime -> String
 httpdate x = x.format_time "%a, %d %b %Y %X GMT"
-
-
-format_time :: String -> UTCTime -> String
-format_time = formatTime defaultTimeLocale
 
 request_method    :: Env -> RequestMethod
 script_name       :: Env -> ByteString
