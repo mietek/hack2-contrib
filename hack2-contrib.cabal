@@ -31,7 +31,7 @@ library
                   , air >= 2011.6.11
                   , hack2 >= 2009.10.30
                   , utf8-string
-                  , ansi-wl-pprint
+                  -- , ansi-wl-pprint
                   , regexpr
                   
   hs-source-dirs: src/
@@ -50,9 +50,9 @@ library
                     Hack2.Contrib.Middleware.Inspect
                     Hack2.Contrib.Middleware.NotFound
                     Hack2.Contrib.Middleware.RegexpRouter
-                    Hack2.Contrib.Middleware.ShowExceptions
+                    -- Hack2.Contrib.Middleware.ShowExceptions
                     Hack2.Contrib.Middleware.SimpleAccessLogger
-                    Hack2.Contrib.Middleware.Hub
+                    -- Hack2.Contrib.Middleware.Hub
                     Hack2.Contrib.Middleware.Static
                     Hack2.Contrib.Middleware.URLMap
                     Hack2.Contrib.Middleware.IOConfig
