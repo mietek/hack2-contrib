@@ -12,14 +12,15 @@ import  Hack2.Contrib.Middleware.Head
 import  Hack2.Contrib.Middleware.Inspect
 import  Hack2.Contrib.Middleware.NotFound
 import  Hack2.Contrib.Middleware.RegexpRouter
-import  Hack2.Contrib.Middleware.ShowExceptions
+-- import  Hack2.Contrib.Middleware.ShowExceptions
 import  Hack2.Contrib.Middleware.SimpleAccessLogger
-import  Hack2.Contrib.Middleware.Hub
+-- import  Hack2.Contrib.Middleware.Hub
 import  Hack2.Contrib.Middleware.Static
 import  Hack2.Contrib.Middleware.URLMap
 import  Hack2.Contrib.Middleware.IOConfig
 import  Hack2.Contrib.Middleware.UserMime
 import  Hack2.Contrib.Middleware.UTF8Body
+import  Hack2.Contrib.Middleware.XForwordedForToRemoteHost
 
 import  Hack2.Contrib.Middleware.Cascade
 import  Hack2.Contrib.Mime

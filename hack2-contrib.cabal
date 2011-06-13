@@ -1,5 +1,5 @@
 Name:                 hack2-contrib
-Version:              2011.6.11
+Version:              2011.6.13
 Build-type:           Simple
 Synopsis:             Hack2 contrib
 Description:          Common middlewares and utilities that helps working with Hack2
@@ -59,6 +59,7 @@ library
                     Hack2.Contrib.Middleware.UserMime
                     -- Hack2.Contrib.Middleware.UTF8Body
                     Hack2.Contrib.Middleware.Cascade
+                    Hack2.Contrib.Middleware.XForwordedForToRemoteHost
                     Hack2.Contrib.Mime
                     Hack2.Contrib.Request
                     Hack2.Contrib.Response
