@@ -5,7 +5,7 @@ module Hack2.Contrib.Middleware.XForwordedForToRemoteHost (x_forwarded_for_to_re
 import Hack2
 import Air.Env
 import Prelude ()
-
+import Data.ByteString.Lazy.Char8 ()
 
 x_forwarded_for_to_remote_host :: Middleware
 x_forwarded_for_to_remote_host app = \env ->
