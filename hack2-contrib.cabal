@@ -59,7 +59,7 @@ library
                     Hack2.Contrib.Middleware.UserMime
                     -- Hack2.Contrib.Middleware.UTF8Body
                     Hack2.Contrib.Middleware.Cascade
-                    Hack2.Contrib.Middleware.XForwordedForToRemoteHost
+                    Hack2.Contrib.Middleware.XForwardedForToRemoteHost
                     Hack2.Contrib.Mime
                     Hack2.Contrib.Request
                     Hack2.Contrib.Response
