@@ -33,6 +33,7 @@ library
                   , utf8-string
                   -- , ansi-wl-pprint
                   , regexpr
+                  , enumerator < 5
                   
   hs-source-dirs: src/
   
