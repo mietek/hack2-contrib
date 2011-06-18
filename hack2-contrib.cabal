@@ -28,7 +28,7 @@ library
                   , bytestring
                   , data-default >= 0.2
                   , time
-                  , air >= 2011.6.18
+                  , air >= 2011.6.19
                   , hack2 >= 2011.6.19
                   , utf8-string
                   -- , ansi-wl-pprint
