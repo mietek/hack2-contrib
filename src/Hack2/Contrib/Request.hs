@@ -16,8 +16,8 @@ import qualified Data.ByteString.Lazy.Char8 as B
 import Hack2.Contrib.AirBackports
 
 
-body_bytestring :: Env -> IO ByteString
-body_bytestring = hack_input > unHackEnumerator > fromEnumerator
+input_bytestring :: Env -> IO ByteString
+input_bytestring = hack_input > unHackEnumerator > fromEnumerator
 
 scheme :: Env -> ByteString
 scheme = hack_url_scheme > show > lower > B.pack
@@ -67,7 +67,7 @@ params env =
 
 inputs :: Env -> IO [(ByteString, ByteString)]
 inputs env = do
-  _body <- env.body_bytestring
+  _body <- env.input_bytestring
   return - 
     env
       .httpHeaders
