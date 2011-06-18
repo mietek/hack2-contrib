@@ -10,13 +10,32 @@ import Data.List (lookup)
 import Data.Time
 import Hack2
 import Hack2.Contrib.Constants
-import Air.Light
+import Air.Env hiding (def)
+import Data.Default (def)
 import Network.URI hiding (path)
-import Prelude hiding ((.), (^), (>), lookup, (+), (/), (-))
+import Prelude ()
 import System.Locale (defaultTimeLocale)
 import qualified Data.ByteString.Lazy.Char8 as B
 import qualified Data.Map as M
 import Hack2.Contrib.AirBackports
+
+import qualified Data.ByteString.Char8 as Strict
+
+import qualified Data.Enumerator.Binary as EB
+import qualified Data.Enumerator.List as EL
+
+import Data.Enumerator (run_, enumList, Enumerator, ($$))
+
+fromEnumerator :: Monad m => Enumerator Strict.ByteString m B.ByteString -> m B.ByteString
+fromEnumerator m = run_ - m $$ EB.consume
+
+toEnumerator :: Monad m => B.ByteString -> Enumerator Strict.ByteString m a
+toEnumerator = enumList 1 < B.toChunks
+
+withEnumerator :: Monad m => (B.ByteString -> B.ByteString) -> Enumerator Strict.ByteString m B.ByteString -> m (Enumerator Strict.ByteString m a)
+withEnumerator f enum = do
+  bytes <- fromEnumerator enum
+  return - toEnumerator - f bytes
 
 empty_app :: Application
 empty_app = return def
@@ -82,7 +101,7 @@ server_name       :: Env -> ByteString
 server_port       :: Env -> Int
 hack_version      :: Env -> (Int, Int, Int)
 hack_url_scheme   :: Env -> HackUrlScheme
-hack_input        :: Env -> ByteString
+hack_input        :: Env -> HackEnumerator
 hack_errors       :: Env -> HackErrors
 hack_headers       :: Env -> [(ByteString, ByteString)]
 

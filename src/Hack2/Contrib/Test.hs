@@ -19,7 +19,7 @@ import  Hack2.Contrib.Middleware.Static
 import  Hack2.Contrib.Middleware.URLMap
 import  Hack2.Contrib.Middleware.IOConfig
 import  Hack2.Contrib.Middleware.UserMime
-import  Hack2.Contrib.Middleware.UTF8Body
+-- import  Hack2.Contrib.Middleware.UTF8Body
 import  Hack2.Contrib.Middleware.XForwardedForToRemoteHost
 
 import  Hack2.Contrib.Middleware.Cascade

@@ -16,8 +16,8 @@ import qualified Data.ByteString.Lazy.Char8 as B
 import Hack2.Contrib.AirBackports
 
 
-body :: Env -> ByteString
-body = hack_input
+body_bytestring :: Env -> IO ByteString
+body_bytestring = hack_input > unHackEnumerator > fromEnumerator
 
 scheme :: Env -> ByteString
 scheme = hack_url_scheme > show > lower > B.pack
@@ -65,16 +65,19 @@ params env =
     then []
     else env.query_string.B.unpack.formDecode.map_both B.pack
 
-inputs :: Env -> [(ByteString, ByteString)]
-inputs env = 
-  env
-    .httpHeaders
-    .map_fst (B.unpack > upper > gsub "-" "_") -- cgi env use all cap letters
-    .map_snd B.unpack
-    .(("REQUEST_METHOD", env.request_method.show) : ) -- for cgi request
-    .flip decodeInput (env.body)
-    .fst
-    .concatMap to_headers
+inputs :: Env -> IO [(ByteString, ByteString)]
+inputs env = do
+  _body <- env.body_bytestring
+  return - 
+    env
+      .httpHeaders
+      .map_fst (B.unpack > upper > gsub "-" "_") -- cgi env use all cap letters
+      .map_snd B.unpack
+      .(("REQUEST_METHOD", env.request_method.show) : ) -- for cgi request
+      .flip decodeInput _body
+      .fst
+      .concatMap to_headers
+      
   where
     to_headers (k, input) = case input.inputFilename of
       Nothing -> [(k.B.pack, input.inputValue)]

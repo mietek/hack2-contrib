@@ -60,7 +60,7 @@ serve root fname = do
         
         return - 
           def 
-            .set_body content
+            .set_body_bytestring content
             .set_content_length size
             .set_content_type content_type
             .set_last_modified (B.pack mtime_str)
@@ -72,7 +72,7 @@ no_permission path = return $
     .set_status 404
     .set_content_type _TextPlain
     .set_content_length (msg.B.length)
-    .set_body msg
+    .set_body_bytestring msg
 
   where msg = "No permission: " + path + "\n"
 
@@ -82,7 +82,7 @@ not_found path = return $
     .set_status 404
     .set_content_type _TextPlain
     .set_content_length (msg.B.length)
-    .set_body msg
+    .set_body_bytestring msg
   
   where msg = "File not found: " + path + "\n"
 
@@ -92,7 +92,7 @@ forbidden = return -
     .set_status 403
     .set_content_type _TextPlain
     .set_content_length (msg.B.length)
-    .set_body msg
+    .set_body_bytestring msg
 
   where msg = "Forbidden\n"
   

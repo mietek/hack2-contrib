@@ -1,4 +1,5 @@
 {-# LANGUAGE QuasiQuotes #-}
+{-# LANGUAGE ExistentialQuantification #-}
 
 module Hack2.Contrib.Response where
 
@@ -7,11 +8,16 @@ import Data.Maybe
 import Hack2
 import Hack2.Contrib.Constants
 import Hack2.Contrib.Utils
-import Air.Env hiding (Default, def)
-import Prelude hiding ((.), (^), (>), (+))
+import Air.Env hiding (def)
+import Prelude ()
 import qualified Data.ByteString.Lazy.Char8 as B
 import Hack2.Contrib.AirBackports
+import Data.Default (def)
+import Data.Enumerator (run_, enumList, Enumerator, ($$))
+import qualified Data.ByteString.Char8 as Strict
 
+body_bytestring :: Response -> IO B.ByteString
+body_bytestring r = r.body.unHackEnumerator.fromEnumerator
 
 redirect :: ByteString -> Maybe Int -> Response -> Response
 redirect target code = 
@@ -22,7 +28,7 @@ finish :: Response -> Response
 finish r 
   | r.status.belongs_to [204, 304]
       = r .delete_header _ContentType
-          .set_body B.empty
+          .set_body def
   | otherwise = r
 
 
@@ -44,8 +50,14 @@ set_content_type s r = r.set_header _ContentType s
 set_content_length :: (Integral a) => a -> Response -> Response
 set_content_length i r = r.set_header _ContentLength (i.show_bytestring)
 
-set_body :: ByteString -> Response -> Response
+set_body :: HackEnumerator -> Response -> Response
 set_body s r = r { body = s }
+
+set_body_bytestring :: B.ByteString -> Response -> Response
+set_body_bytestring b r = 
+  let enum = b.toEnumerator :: (forall a. Enumerator Strict.ByteString IO a)
+  in
+  set_body (HackEnumerator enum) r
 
 set_status :: Int -> Response -> Response
 set_status i r = r { status = i }

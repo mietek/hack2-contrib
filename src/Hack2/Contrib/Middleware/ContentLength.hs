@@ -16,9 +16,11 @@ content_length app = \env -> do
   response <- app env
   
   if should_size response
-    then response
-      .set_header _ContentLength (response.body.bytesize.show_bytestring) .return
-    else response .return
+    then do
+      size <- response.body_bytestring ^ bytesize ^ show_bytestring
+      return - response.set_header _ContentLength size
+    else 
+      return - response
   
   where 
     should_size response =
