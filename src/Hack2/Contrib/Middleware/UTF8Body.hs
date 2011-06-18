@@ -1,6 +1,6 @@
 module Hack2.Contrib.Middleware.UTF8Body (utf8_body) where
 
-import Air.Env
+import Air.Env hiding (Default, def)
 import Prelude ()
 import Air.Heavy
 import Hack2

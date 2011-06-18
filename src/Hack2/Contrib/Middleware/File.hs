@@ -15,7 +15,7 @@ import Hack2.Contrib.Mime
 import Hack2.Contrib.Response
 import Hack2.Contrib.Utils
 import Hack2.Contrib.AirBackports
-import Air.Env
+import Air.Env hiding (Default, def)
 import Prelude ()
 import System.Directory
 import System.FilePath

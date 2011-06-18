@@ -3,7 +3,7 @@
 module Hack2.Contrib.Middleware.XForwardedForToRemoteHost (x_forwarded_for_to_remote_host) where
 
 import Hack2
-import Air.Env
+import Air.Env hiding (Default, def)
 import Prelude ()
 import Data.ByteString.Lazy.Char8 ()
 

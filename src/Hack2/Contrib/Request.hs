@@ -8,7 +8,7 @@ import Data.Maybe
 import Hack2 hiding (body)
 import Hack2.Contrib.Constants
 import Hack2.Contrib.Utils
-import Air.Env
+import Air.Env hiding (Default, def)
 import Network.CGI.Cookie
 import Network.CGI.Protocol
 import Prelude ()

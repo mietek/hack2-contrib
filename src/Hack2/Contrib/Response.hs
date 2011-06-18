@@ -7,7 +7,7 @@ import Data.Maybe
 import Hack2
 import Hack2.Contrib.Constants
 import Hack2.Contrib.Utils
-import Air.Env
+import Air.Env hiding (Default, def)
 import Prelude hiding ((.), (^), (>), (+))
 import qualified Data.ByteString.Lazy.Char8 as B
 import Hack2.Contrib.AirBackports

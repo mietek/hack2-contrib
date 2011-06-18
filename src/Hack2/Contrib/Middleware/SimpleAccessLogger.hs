@@ -9,7 +9,7 @@ import Hack2.Contrib.Request hiding (referer)
 import Hack2.Contrib.Constants
 import Hack2.Contrib.Utils
 import Hack2.Contrib.AirBackports
-import Air.Env
+import Air.Env hiding (Default, def)
 import Data.Maybe
 import Prelude ()
 import qualified Data.ByteString.Lazy.Char8 as B

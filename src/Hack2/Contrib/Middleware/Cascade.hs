@@ -1,7 +1,7 @@
 module Hack2.Contrib.Middleware.Cascade (cascade) where
 
 import Prelude ()
-import Air.Env
+import Air.Env hiding (Default, def)
 import Hack2
 import Data.Default
 

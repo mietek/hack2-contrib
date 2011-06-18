@@ -11,7 +11,7 @@ import qualified System.IO.Unsafe as Unsafe
 import Text.RegexPR
 import Data.Maybe
 
-import Air.Env
+import Air.Env hiding (Default, def)
 import Prelude ()
 
 b2u, u2b :: String -> String
