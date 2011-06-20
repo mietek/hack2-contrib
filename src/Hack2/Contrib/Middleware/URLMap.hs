@@ -17,7 +17,7 @@ import Hack2.Contrib.Utils
 import List (find, isPrefixOf)
 import Air.Env hiding (Default, def)
 import Prelude ()
-import qualified Data.ByteString.Lazy.Char8 as B
+import qualified Data.ByteString.Char8 as B
 
 
 type RoutePath = (B.ByteString, Application)

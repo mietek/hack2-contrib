@@ -19,8 +19,9 @@ import Air.Env hiding (Default, def)
 import Prelude ()
 import System.Directory
 import System.FilePath
-import qualified Data.ByteString.Lazy.Char8 as B
-import Data.ByteString.Lazy.Char8 (ByteString)
+import qualified Data.ByteString.Char8 as B
+import qualified Data.ByteString.Lazy.Char8 as Lazy
+import Data.ByteString.Char8 (ByteString)
 
 file :: Maybe ByteString -> Middleware
 file root _ = \env -> do
@@ -50,7 +51,7 @@ serve root fname = do
     
     where 
       serving path = do
-        content <- path.B.readFile
+        content <- path.Lazy.readFile
         size <- path.b2u.file_size ^ from_i
         mtime_str <- path.b2u.file_mtime ^ httpdate
         
@@ -71,27 +72,27 @@ no_permission path = return $
   def
     .set_status 404
     .set_content_type _TextPlain
-    .set_content_length (msg.B.length)
+    .set_content_length (msg.Lazy.length)
     .set_body_bytestring msg
 
-  where msg = "No permission: " + path + "\n"
+  where msg = "No permission: " + s2l path + "\n"
 
 not_found :: ByteString -> IO Response
 not_found path = return $
   def
     .set_status 404
     .set_content_type _TextPlain
-    .set_content_length (msg.B.length)
+    .set_content_length (msg.Lazy.length)
     .set_body_bytestring msg
   
-  where msg = "File not found: " + path + "\n"
+  where msg = "File not found: " + s2l path + "\n"
 
 forbidden :: IO Response
 forbidden = return - 
   def
     .set_status 403
     .set_content_type _TextPlain
-    .set_content_length (msg.B.length)
+    .set_content_length (msg.Lazy.length)
     .set_body_bytestring msg
 
   where msg = "Forbidden\n"

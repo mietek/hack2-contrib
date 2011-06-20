@@ -15,8 +15,8 @@ import Hack2.Contrib.Utils
 import List (find, isPrefixOf)
 import Air.Light
 import Prelude hiding ((.), (^), (>), (+))
-import qualified Data.ByteString.Lazy.Char8 as B
-import Data.ByteString.Lazy.Char8 (ByteString)
+import qualified Data.ByteString.Char8 as B
+import Data.ByteString.Char8 (ByteString)
 
 static :: Maybe ByteString -> [ByteString] -> Middleware
 static root urls app = \env -> do

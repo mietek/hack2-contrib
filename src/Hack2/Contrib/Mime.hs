@@ -6,7 +6,7 @@ module Hack2.Contrib.Mime where
 import Air.Light
 import Prelude hiding ((.))
 import qualified Data.Map as M
-import Data.ByteString.Lazy.Char8 (ByteString)
+import Data.ByteString.Char8 (ByteString)
 
 lookup_mime_type :: ByteString -> Maybe ByteString
 lookup_mime_type = flip M.lookup mime_types

@@ -14,7 +14,7 @@ import Air.Heavy
 import Air.Extra
 import Air.TH
 import Prelude hiding ((.), (^), (>), (+), (-))
-import qualified Data.ByteString.Lazy.Char8 as B
+import qualified Data.ByteString.Char8 as B
 
 
 data64 :: String

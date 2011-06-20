@@ -4,7 +4,7 @@
 module Hack2.Contrib.Utils where
 
 import Control.Arrow ((<<<))
-import Data.ByteString.Lazy.Char8 (ByteString)
+import Data.ByteString.Char8 (ByteString)
 import Data.Default
 import Data.List (lookup)
 import Data.Time
@@ -15,7 +15,8 @@ import Data.Default (def)
 import Network.URI hiding (path)
 import Prelude ()
 import System.Locale (defaultTimeLocale)
-import qualified Data.ByteString.Lazy.Char8 as B
+import qualified Data.ByteString.Char8 as B
+import qualified Data.ByteString.Lazy.Char8 as Lazy
 import qualified Data.Map as M
 import Hack2.Contrib.AirBackports
 
@@ -26,16 +27,23 @@ import qualified Data.Enumerator.List as EL
 
 import Data.Enumerator (run_, enumList, Enumerator, ($$))
 
-fromEnumerator :: Monad m => Enumerator Strict.ByteString m B.ByteString -> m B.ByteString
+fromEnumerator :: Monad m => Enumerator Strict.ByteString m Lazy.ByteString -> m Lazy.ByteString
 fromEnumerator m = run_ - m $$ EB.consume
 
-toEnumerator :: Monad m => B.ByteString -> Enumerator Strict.ByteString m a
-toEnumerator = enumList 1 < B.toChunks
+toEnumerator :: Monad m => Lazy.ByteString -> Enumerator Strict.ByteString m a
+toEnumerator = enumList 1 < Lazy.toChunks
 
-withEnumerator :: Monad m => (B.ByteString -> B.ByteString) -> Enumerator Strict.ByteString m B.ByteString -> m (Enumerator Strict.ByteString m a)
+withEnumerator :: Monad m => (Lazy.ByteString -> Lazy.ByteString) -> Enumerator Strict.ByteString m Lazy.ByteString -> m (Enumerator Strict.ByteString m a)
 withEnumerator f enum = do
   bytes <- fromEnumerator enum
   return - toEnumerator - f bytes
+
+l2s :: Lazy.ByteString -> Strict.ByteString
+l2s = Strict.concat < Lazy.toChunks
+
+s2l :: Strict.ByteString -> Lazy.ByteString
+s2l = Lazy.fromChunks < return
+
 
 empty_app :: Application
 empty_app = return def
@@ -52,8 +60,8 @@ put k v xs = (k,v) : xs.reject (fst > is k)
 get :: (Eq a) => a -> [(a, b)] -> Maybe b
 get = lookup
 
-bytesize :: ByteString -> Int
-bytesize = B.length > from_i
+bytesize :: Lazy.ByteString -> Int
+bytesize = Lazy.length > from_i
 
 show_bytestring :: (Show a) => a -> ByteString
 show_bytestring = show > B.pack

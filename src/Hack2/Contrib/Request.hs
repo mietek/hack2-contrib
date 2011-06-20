@@ -3,7 +3,7 @@
 
 module Hack2.Contrib.Request where
 
-import Data.ByteString.Lazy.Char8 (ByteString)
+import Data.ByteString.Char8 (ByteString)
 import Data.Maybe
 import Hack2 hiding (body)
 import Hack2.Contrib.Constants
@@ -12,11 +12,12 @@ import Air.Env hiding (Default, def)
 import Network.CGI.Cookie
 import Network.CGI.Protocol
 import Prelude ()
-import qualified Data.ByteString.Lazy.Char8 as B
+import qualified Data.ByteString.Char8 as B
+import qualified Data.ByteString.Lazy.Char8 as Lazy
 import Hack2.Contrib.AirBackports
 
 
-input_bytestring :: Env -> IO ByteString
+input_bytestring :: Env -> IO Lazy.ByteString
 input_bytestring = hack_input > unHackEnumerator > fromEnumerator
 
 scheme :: Env -> ByteString
@@ -80,9 +81,9 @@ inputs env = do
       
   where
     to_headers (k, input) = case input.inputFilename of
-      Nothing -> [(k.B.pack, input.inputValue)]
+      Nothing -> [(k.B.pack, input.inputValue.l2s)]
       Just name -> 
-        [  (k.B.pack, input.inputValue)
+        [  (k.B.pack, input.inputValue.l2s)
         ,  ("hack2_input_file_name_" + k.B.pack, name.B.pack)
         ]
 

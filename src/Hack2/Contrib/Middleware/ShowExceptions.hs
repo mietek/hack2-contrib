@@ -12,7 +12,7 @@ import Air.Light
 import Prelude hiding ((.), (^), (>), (-), log)
 import System.IO  
 import System.IO.Error
-import qualified Data.ByteString.Lazy.Char8 as B
+import qualified Data.ByteString.Char8 as B
 
 program :: String
 program = "ShowExceptions"

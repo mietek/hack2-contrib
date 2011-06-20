@@ -23,7 +23,7 @@ import Air
 import Air.Heavy
 import Air.TH
 import Prelude hiding ((.), (^), (>), head)
-import qualified Data.ByteString.Lazy.Char8 as B
+import qualified Data.ByteString.Char8 as B
 
 show_status :: Middleware
 show_status app = \env -> do

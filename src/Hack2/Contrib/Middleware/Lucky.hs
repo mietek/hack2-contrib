@@ -13,7 +13,7 @@ import Air
 import Air.Heavy
 import Air.TH
 import Prelude hiding ((.), (^), (>), (+), (-))
-import qualified Data.ByteString.Lazy.Char8 as B
+import qualified Data.ByteString.Char8 as B
 
 lucky :: Middleware
 lucky app = \env -> do

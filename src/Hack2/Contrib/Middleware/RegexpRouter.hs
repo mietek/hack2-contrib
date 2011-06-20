@@ -10,7 +10,7 @@ import Hack2.Contrib.AirBackports
 import List (find)
 import Air
 import Prelude hiding ((.), (^), (>), (-))
-import qualified Data.ByteString.Lazy.Char8 as B
+import qualified Data.ByteString.Char8 as B
 
 type RoutePath = (String, Application)
 

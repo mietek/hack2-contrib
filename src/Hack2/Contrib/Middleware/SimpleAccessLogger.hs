@@ -12,7 +12,7 @@ import Hack2.Contrib.AirBackports
 import Air.Env hiding (Default, def)
 import Data.Maybe
 import Prelude ()
-import qualified Data.ByteString.Lazy.Char8 as B
+import qualified Data.ByteString.Char8 as B
 import System.IO
 import Control.Concurrent
 

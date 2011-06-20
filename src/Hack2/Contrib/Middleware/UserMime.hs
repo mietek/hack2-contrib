@@ -8,8 +8,8 @@ import Hack2.Contrib.Response
 import Hack2.Contrib.Utils
 import Air.Light
 import Prelude hiding ((.), (-))
-import qualified Data.ByteString.Lazy.Char8 as B
-import Data.ByteString.Lazy.Char8 (ByteString)
+import qualified Data.ByteString.Char8 as B
+import Data.ByteString.Char8 (ByteString)
 
 user_mime :: [(ByteString, ByteString)] -> Middleware
 user_mime h app env = do

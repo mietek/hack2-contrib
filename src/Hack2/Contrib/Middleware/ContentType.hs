@@ -8,7 +8,7 @@ import Hack2.Contrib.Constants
 import Hack2.Contrib.Response
 import Air.Light
 import Prelude hiding ((.), (^), (>), (-))
-import Data.ByteString.Lazy.Char8 (ByteString)
+import Data.ByteString.Char8 (ByteString)
 
 
 content_type :: ByteString -> Middleware

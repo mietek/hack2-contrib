@@ -6,7 +6,7 @@ module Hack2.Contrib.Constants where
 import Air.Light
 import Prelude hiding ((.))
 import Data.Map
-import Data.ByteString.Lazy.Char8 (ByteString)
+import Data.ByteString.Char8 (ByteString)
 
 status_with_no_entity_body :: [Int]
 status_with_no_entity_body = [100 .. 199] ++ [204, 304]

@@ -3,20 +3,20 @@
 
 module Hack2.Contrib.Response where
 
-import Data.ByteString.Lazy.Char8 (ByteString)
+import Data.ByteString.Char8 (ByteString)
 import Data.Maybe
 import Hack2
 import Hack2.Contrib.Constants
 import Hack2.Contrib.Utils
 import Air.Env hiding (def)
 import Prelude ()
-import qualified Data.ByteString.Lazy.Char8 as B
+import qualified Data.ByteString.Lazy.Char8 as Lazy
 import Hack2.Contrib.AirBackports
 import Data.Default (def)
 import Data.Enumerator (run_, enumList, Enumerator, ($$))
 import qualified Data.ByteString.Char8 as Strict
 
-body_bytestring :: Response -> IO B.ByteString
+body_bytestring :: Response -> IO Lazy.ByteString
 body_bytestring r = r.body.unHackEnumerator.fromEnumerator
 
 redirect :: ByteString -> Maybe Int -> Response -> Response
@@ -53,7 +53,7 @@ set_content_length i r = r.set_header _ContentLength (i.show_bytestring)
 set_body :: HackEnumerator -> Response -> Response
 set_body s r = r { body = s }
 
-set_body_bytestring :: B.ByteString -> Response -> Response
+set_body_bytestring :: Lazy.ByteString -> Response -> Response
 set_body_bytestring b r = 
   let enum = b.toEnumerator :: (forall a. Enumerator Strict.ByteString IO a)
   in
