@@ -29,7 +29,7 @@ library
                   , data-default >= 0.2
                   , time
                   , air >= 2011.6.19
-                  , hack2 >= 2011.6.19
+                  , hack2 >= 2011.6.20
                   , utf8-string
                   -- , ansi-wl-pprint
                   , regexpr
