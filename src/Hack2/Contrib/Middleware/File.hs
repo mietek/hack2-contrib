@@ -22,6 +22,8 @@ import System.FilePath
 import qualified Data.ByteString.Char8 as B
 import qualified Data.ByteString.Lazy.Char8 as Lazy
 import Data.ByteString.Char8 (ByteString)
+import Data.Enumerator.Binary (enumFile)
+
 
 file :: Maybe ByteString -> Middleware
 file root _ = \env -> do
@@ -51,7 +53,7 @@ serve root fname = do
     
     where 
       serving path = do
-        content <- path.Lazy.readFile
+        let file_enumerator = enumFile path
         size <- path.b2u.file_size ^ from_i
         mtime_str <- path.b2u.file_mtime ^ httpdate
         
@@ -61,7 +63,7 @@ serve root fname = do
         
         return - 
           def 
-            .set_body_bytestring content
+            .set_body (HackEnumerator file_enumerator)
             .set_content_length size
             .set_content_type content_type
             .set_last_modified (B.pack mtime_str)
