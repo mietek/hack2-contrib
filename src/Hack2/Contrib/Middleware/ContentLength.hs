@@ -10,15 +10,18 @@ import Hack2.Contrib.Utils
 import Air.Light
 import Prelude hiding ((.), (^), (>), (-))
 
-
 content_length :: Middleware
 content_length app = \env -> do
   response <- app env
   
   if should_size response
     then do
-      size <- response.body_bytestring ^ bytesize ^ show_bytestring
-      return - response.set_header _ContentLength size
+      _body <- response.body_bytestring
+      let size = _body.bytesize.show_bytestring
+      return - 
+        response
+          .set_header _ContentLength size
+          .set_body_bytestring _body
     else 
       return - response
   
