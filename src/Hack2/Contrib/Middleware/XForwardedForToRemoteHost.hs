@@ -9,7 +9,7 @@ import Data.ByteString.Char8 ()
 
 x_forwarded_for_to_remote_host :: Middleware
 x_forwarded_for_to_remote_host app = \env ->
-  case env.httpHeaders.lookup "x-forwarded-for" of
+  case env.httpHeaders.lookup "X-Forwarded-For" of
     Nothing -> app env
     Just ip -> 
       let newHackHeaders = ("RemoteHost", ip) : env.hackHeaders
