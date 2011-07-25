@@ -38,13 +38,6 @@ withEnumerator f enum = do
   bytes <- fromEnumerator enum
   return - toEnumerator - f bytes
 
-l2s :: Lazy.ByteString -> Strict.ByteString
-l2s = Strict.concat < Lazy.toChunks
-
-s2l :: Strict.ByteString -> Lazy.ByteString
-s2l = Lazy.fromChunks < return
-
-
 empty_app :: Application
 empty_app = return def
 
