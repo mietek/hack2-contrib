@@ -1,5 +1,5 @@
 Name:                 hack2-contrib
-Version:              2011.7.25
+Version:              2011.9.3
 Build-type:           Simple
 Synopsis:             Hack2 contrib
 Description:          Common middlewares and utilities that helps working with Hack2
@@ -19,7 +19,6 @@ library
                     base >=4 && < 5
                   , cgi
                   , network
-                  , haskell98
                   , old-locale
                   , old-time
                   , directory

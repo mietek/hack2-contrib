@@ -12,7 +12,7 @@ import Data.Maybe
 import Hack2
 import Hack2.Contrib.Middleware.File (file)
 import Hack2.Contrib.Utils
-import List (find, isPrefixOf)
+import Data.List (find, isPrefixOf)
 import Air.Light
 import Prelude hiding ((.), (^), (>), (+))
 import qualified Data.ByteString.Char8 as B

@@ -7,7 +7,7 @@ import Data.Maybe
 import Hack2
 import Hack2.Contrib.Utils
 import Hack2.Contrib.AirBackports
-import List (find)
+import Data.List (find)
 import Air
 import Prelude hiding ((.), (^), (>), (-))
 import qualified Data.ByteString.Char8 as B
