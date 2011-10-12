@@ -27,5 +27,9 @@ static root urls app = \env -> do
   let can_serve = my_urls.find ( `B.isPrefixOf` path ) .isJust
   
   if can_serve
-    then file root app env
-    else app env
+    then do
+      -- putStrLn "can serve"
+      file root app env
+    else do
+      -- putStrLn "not valid prefix"
+      app env

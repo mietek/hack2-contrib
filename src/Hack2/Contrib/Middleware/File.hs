@@ -40,22 +40,37 @@ serve root fname = do
   let my_root = ( root ^ B.unpack ).fromMaybe cwd
   let path = my_root / makeRelative "/" (fname.B.unpack)
   
-  exist <- doesFileExist path
+  -- puts - b2u - path
+  
+  exist <- doesFileExist - b2u path
 
   if not exist
-      then path.B.pack.not_found
+      then do
+        -- puts "not exist"
+        path.B.pack.not_found
+        
       else
         do 
-          can_read <- path.getPermissions ^ readable
+          -- puts "exist"
+          can_read <- path.b2u.getPermissions ^ readable
+          
+          -- puts - "can_read is: " + show can_read
           if not can_read
             then path.B.pack.no_permission
             else path.serving
     
     where 
       serving path = do
-        let file_enumerator = enumFile path
+        -- puts "serving path"
+        
+        let file_enumerator = enumFile - b2u path
+        
         size <- path.b2u.file_size ^ from_i
+        -- puts - "size is " + show size
+        
+        
         mtime_str <- path.b2u.file_mtime ^ httpdate
+        -- puts - "mtime_str is " + mtime_str
         
         let default_content_type = "application/octet-stream"
         let safe_lookup = lookup_mime_type > fromMaybe default_content_type
@@ -70,14 +85,16 @@ serve root fname = do
             .set_status 200
 
 no_permission :: ByteString -> IO Response
-no_permission path = return $
-  def
-    .set_status 404
-    .set_content_type _TextPlain
-    .set_content_length (msg.Lazy.length)
-    .set_body_bytestring msg
+no_permission path = do
+  putStrLn "no_permission"
+  return - 
+    def
+      .set_status 404
+      .set_content_type _TextPlain
+      .set_content_length (msg.Lazy.length)
+      .set_body_bytestring msg
 
-  where msg = "No permission: " + s2l path + "\n"
+    where msg = "No permission: " + s2l path + "\n"
 
 not_found :: ByteString -> IO Response
 not_found path = return $

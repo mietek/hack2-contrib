@@ -20,11 +20,11 @@ u2b = Codec.encodeString
 
 
 file_size :: String -> IO Integer
-file_size path = withFile (path.u2b) ReadMode hFileSize
+file_size path = withFile path ReadMode hFileSize
 
 file_mtime :: String -> IO UTCTime
 file_mtime path = 
-  getModificationTime (path.u2b) ^ seconds ^ from_i ^ posixSecondsToUTCTime
+  getModificationTime path ^ seconds ^ from_i ^ posixSecondsToUTCTime
   where seconds (TOD s _) = s
   
 now :: IO UTCTime
