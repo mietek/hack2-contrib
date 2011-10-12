@@ -16,7 +16,7 @@ data-files:           readme.md, changelog.md
 library
 
   build-depends: 
-                    base >=4
+                    base >=4 && < 100
                   , cgi
                   , network
                   , old-locale
@@ -32,7 +32,7 @@ library
                   , utf8-string
                   -- , ansi-wl-pprint
                   , regexpr
-                  , enumerator < 5
+                  , enumerator
                   
   hs-source-dirs: src/
   
