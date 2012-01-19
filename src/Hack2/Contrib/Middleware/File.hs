@@ -61,7 +61,7 @@ serve root fname = do
       serving path = do
         -- puts "serving path"
         
-        file_data <- B.readFile path
+        file_data <- B.readFile - b2u path
         
         size <- path.b2u.file_size ^ from_i
         -- puts - "size is " + show size

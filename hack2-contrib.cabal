@@ -1,5 +1,5 @@
 Name:                 hack2-contrib
-Version:              2012.1.19
+Version:              2012.1.19.1
 Build-type:           Simple
 Synopsis:             Hack2 contrib
 Description:          Common middlewares and utilities that helps working with Hack2
