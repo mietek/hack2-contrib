@@ -4,10 +4,9 @@ import Hack2
 import Hack2.Contrib.Response
 import Hack2.Contrib.Utils
 
-import Air.Env hiding (def, head)
+import Air.Env hiding (head)
 import Prelude ()
 import qualified Data.ByteString.Char8 as B
-import Data.Default (def)
 
 head :: Middleware
 head app = \env -> do

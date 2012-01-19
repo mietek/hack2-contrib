@@ -13,12 +13,11 @@ import Network.CGI.Cookie
 import Network.CGI.Protocol
 import Prelude ()
 import qualified Data.ByteString.Char8 as B
-import qualified Data.ByteString.Lazy.Char8 as Lazy
 import Hack2.Contrib.AirBackports
 
 
-input_bytestring :: Env -> IO Lazy.ByteString
-input_bytestring = hack_input > unHackEnumerator > fromEnumerator
+input_bytestring :: Env -> IO ByteString
+input_bytestring = hack_input > return
 
 scheme :: Env -> ByteString
 scheme = hack_url_scheme > show > lower > B.pack
@@ -75,7 +74,7 @@ inputs env = do
       .map_fst (B.unpack > upper > gsub "-" "_") -- cgi env use all cap letters
       .map_snd B.unpack
       .(("REQUEST_METHOD", env.request_method.show) : ) -- for cgi request
-      .flip decodeInput _body
+      .flip decodeInput (_body.s2l)
       .fst
       .concatMap to_headers
       

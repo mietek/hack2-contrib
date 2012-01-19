@@ -20,9 +20,7 @@ import Prelude ()
 import System.Directory
 import System.FilePath
 import qualified Data.ByteString.Char8 as B
-import qualified Data.ByteString.Lazy.Char8 as Lazy
 import Data.ByteString.Char8 (ByteString)
-import Data.Enumerator.Binary (enumFile)
 
 
 file :: Maybe ByteString -> Middleware
@@ -63,7 +61,7 @@ serve root fname = do
       serving path = do
         -- puts "serving path"
         
-        let file_enumerator = enumFile - b2u path
+        file_data <- B.readFile path
         
         size <- path.b2u.file_size ^ from_i
         -- puts - "size is " + show size
@@ -78,7 +76,7 @@ serve root fname = do
         
         return - 
           def 
-            .set_body (HackEnumerator file_enumerator)
+            .set_body_bytestring file_data
             .set_content_length size
             .set_content_type content_type
             .set_last_modified (B.pack mtime_str)
@@ -91,27 +89,27 @@ no_permission path = do
     def
       .set_status 404
       .set_content_type _TextPlain
-      .set_content_length (msg.Lazy.length)
+      .set_content_length (msg.B.length)
       .set_body_bytestring msg
 
-    where msg = "No permission: " + s2l path + "\n"
+    where msg = "No permission: " + path + "\n"
 
 not_found :: ByteString -> IO Response
 not_found path = return $
   def
     .set_status 404
     .set_content_type _TextPlain
-    .set_content_length (msg.Lazy.length)
+    .set_content_length (msg.B.length)
     .set_body_bytestring msg
   
-  where msg = "File not found: " + s2l path + "\n"
+  where msg = "File not found: " + path + "\n"
 
 forbidden :: IO Response
 forbidden = return - 
   def
     .set_status 403
     .set_content_type _TextPlain
-    .set_content_length (msg.Lazy.length)
+    .set_content_length (msg.B.length)
     .set_body_bytestring msg
 
   where msg = "Forbidden\n"

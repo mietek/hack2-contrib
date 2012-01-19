@@ -5,7 +5,7 @@ import Prelude ()
 import Air.Heavy
 import Hack2
 import Data.ByteString.Char8 (unpack)
-import Data.ByteString.Lazy.UTF8 (fromString)
+import Data.ByteString.UTF8 (fromString)
 
 utf8_body :: Middleware
 utf8_body app = \env -> do

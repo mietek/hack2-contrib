@@ -1,5 +1,5 @@
 Name:                 hack2-contrib
-Version:              2011.10.12
+Version:              2012.1.19
 Build-type:           Simple
 Synopsis:             Hack2 contrib
 Description:          Common middlewares and utilities that helps working with Hack2
@@ -28,11 +28,10 @@ library
                   , data-default >= 0.2
                   , time
                   , air >= 2011.6.19
-                  , hack2 >= 2011.6.20
+                  , hack2 >= 2012.1.19
                   , utf8-string
                   -- , ansi-wl-pprint
                   , regexpr
-                  , enumerator
                   
   hs-source-dirs: src/
   

@@ -8,16 +8,13 @@ import Data.Maybe
 import Hack2
 import Hack2.Contrib.Constants
 import Hack2.Contrib.Utils
-import Air.Env hiding (def)
+import Air.Env
 import Prelude ()
-import qualified Data.ByteString.Lazy.Char8 as Lazy
 import Hack2.Contrib.AirBackports
-import Data.Default (def)
-import Data.Enumerator (run_, enumList, Enumerator, ($$))
 import qualified Data.ByteString.Char8 as Strict
 
-body_bytestring :: Response -> IO Lazy.ByteString
-body_bytestring r = r.body.unHackEnumerator.fromEnumerator
+body_bytestring :: Response -> IO ByteString
+body_bytestring = body > return
 
 redirect :: ByteString -> Maybe Int -> Response -> Response
 redirect target code = 
@@ -50,14 +47,11 @@ set_content_type s r = r.set_header _ContentType s
 set_content_length :: (Integral a) => a -> Response -> Response
 set_content_length i r = r.set_header _ContentLength (i.show_bytestring)
 
-set_body :: HackEnumerator -> Response -> Response
+set_body :: ByteString -> Response -> Response
 set_body s r = r { body = s }
 
-set_body_bytestring :: Lazy.ByteString -> Response -> Response
-set_body_bytestring b r = 
-  let enum = b.toEnumerator :: (forall a. Enumerator Strict.ByteString IO a)
-  in
-  set_body (HackEnumerator enum) r
+set_body_bytestring :: ByteString -> Response -> Response
+set_body_bytestring = set_body
 
 set_status :: Int -> Response -> Response
 set_status i r = r { status = i }

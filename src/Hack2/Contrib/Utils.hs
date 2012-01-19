@@ -16,27 +16,10 @@ import Network.URI hiding (path)
 import Prelude ()
 import System.Locale (defaultTimeLocale)
 import qualified Data.ByteString.Char8 as B
-import qualified Data.ByteString.Lazy.Char8 as Lazy
 import qualified Data.Map as M
 import Hack2.Contrib.AirBackports
 
 import qualified Data.ByteString.Char8 as Strict
-
-import qualified Data.Enumerator.Binary as EB
-import qualified Data.Enumerator.List as EL
-
-import Data.Enumerator (run_, enumList, Enumerator, ($$))
-
-fromEnumerator :: Monad m => Enumerator Strict.ByteString m Lazy.ByteString -> m Lazy.ByteString
-fromEnumerator m = run_ - m $$ EB.consume
-
-toEnumerator :: Monad m => Lazy.ByteString -> Enumerator Strict.ByteString m a
-toEnumerator = enumList 1 < Lazy.toChunks
-
-withEnumerator :: Monad m => (Lazy.ByteString -> Lazy.ByteString) -> Enumerator Strict.ByteString m Lazy.ByteString -> m (Enumerator Strict.ByteString m a)
-withEnumerator f enum = do
-  bytes <- fromEnumerator enum
-  return - toEnumerator - f bytes
 
 empty_app :: Application
 empty_app = return def
@@ -53,8 +36,8 @@ put k v xs = (k,v) : xs.reject (fst > is k)
 get :: (Eq a) => a -> [(a, b)] -> Maybe b
 get = lookup
 
-bytesize :: Lazy.ByteString -> Int
-bytesize = Lazy.length > from_i
+bytesize :: ByteString -> Int
+bytesize = B.length > from_i
 
 show_bytestring :: (Show a) => a -> ByteString
 show_bytestring = show > B.pack
@@ -102,7 +85,7 @@ server_name       :: Env -> ByteString
 server_port       :: Env -> Int
 hack_version      :: Env -> (Int, Int, Int)
 hack_url_scheme   :: Env -> HackUrlScheme
-hack_input        :: Env -> HackEnumerator
+hack_input        :: Env -> ByteString
 hack_errors       :: Env -> HackErrors
 hack_headers       :: Env -> [(ByteString, ByteString)]
 
