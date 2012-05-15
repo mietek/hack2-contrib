@@ -44,7 +44,7 @@ delete_header k r = r { headers = r.headers.reject (fst > is k) }
 set_content_type :: ByteString -> Response -> Response
 set_content_type s r = r.set_header _ContentType s
 
-set_content_length :: (Integral a) => a -> Response -> Response
+set_content_length :: (Integral a, Show a) => a -> Response -> Response
 set_content_length i r = r.set_header _ContentLength (i.show_bytestring)
 
 set_body :: ByteString -> Response -> Response
