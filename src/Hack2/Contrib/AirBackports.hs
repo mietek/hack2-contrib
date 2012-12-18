@@ -23,9 +23,8 @@ file_size :: String -> IO Integer
 file_size path = withFile path ReadMode hFileSize
 
 file_mtime :: String -> IO UTCTime
-file_mtime path = 
-  getModificationTime path ^ seconds ^ from_i ^ posixSecondsToUTCTime
-  where seconds (TOD s _) = s
+file_mtime = getModificationTime
+
   
 now :: IO UTCTime
 now = getCurrentTime
