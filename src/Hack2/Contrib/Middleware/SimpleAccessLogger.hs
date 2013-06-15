@@ -32,7 +32,8 @@ simple_access_logger stream app = \env -> do
       
       method      = env.request_method.show_bytestring
       http_status = env.hack_url_scheme.show_bytestring
-      access_path = env.fullpath.as_string unescape_uri
+      access_path = env.fullpath.as_string (unescape_uri > u2b)
+      
       
       fields =
         [ env.remote_host
@@ -42,7 +43,6 @@ simple_access_logger stream app = \env -> do
         , r.status.show_bytestring
         , r.headers.get _ContentLength .fromMaybe "-"
         ]
-  
   puts - fields.B.intercalate " "
   return r
   

@@ -25,7 +25,7 @@ import Data.ByteString.Char8 (ByteString)
 
 file :: Maybe ByteString -> Middleware
 file root _ = \env -> do
-  let path = env.path_info .as_string unescape_uri
+  let path = env.path_info .as_string (unescape_uri > u2b)
   
   if B.unpack ".." `isInfixOf` B.unpack path
     then forbidden
