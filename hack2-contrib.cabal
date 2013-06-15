@@ -1,5 +1,5 @@
 Name:                 hack2-contrib
-Version:              2013.6.15
+Version:              2013.6.15.1
 Build-type:           Simple
 Synopsis:             Hack2 contrib
 Description:          Common middlewares and utilities for Hack2
@@ -32,6 +32,7 @@ library
                   , hack2
                   , utf8-string
                   , regexpr
+                  , air-extra
                   
   hs-source-dirs: src/
   
