@@ -17,7 +17,7 @@ import Air.Light
 import Prelude hiding ((.), (^), (>), (+))
 import qualified Data.ByteString.Char8 as B
 import Data.ByteString.Char8 (ByteString)
-import Air.Extra (u2b)
+import Hack2.Contrib.AirBackports (u2b)
 
 static :: Maybe ByteString -> [ByteString] -> Middleware
 static root urls app = \env -> do

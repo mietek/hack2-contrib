@@ -1,5 +1,5 @@
 Name:                 hack2-contrib
-Version:              2013.6.15.1
+Version:              2013.6.16
 Build-type:           Simple
 Synopsis:             Hack2 contrib
 Description:          Common middlewares and utilities for Hack2
@@ -21,7 +21,6 @@ library
                   , cgi
                   , network
                   , old-locale
-                  , old-time
                   , directory
                   , filepath
                   , containers
@@ -31,15 +30,15 @@ library
                   , air
                   , hack2
                   , utf8-string
-                  , regexpr
-                  , air-extra
                   
   hs-source-dirs: src/
   
   exposed-modules:  
                     
+                    Hack2.Contrib.AirBackports
                     Hack2.Contrib.Constants
                     Hack2.Contrib.Middleware.BounceFavicon
+                    Hack2.Contrib.Middleware.Cascade
                     Hack2.Contrib.Middleware.Censor
                     Hack2.Contrib.Middleware.Config
                     Hack2.Contrib.Middleware.ContentLength
@@ -47,24 +46,19 @@ library
                     Hack2.Contrib.Middleware.Debug
                     Hack2.Contrib.Middleware.File
                     Hack2.Contrib.Middleware.Head
+                    Hack2.Contrib.Middleware.IOConfig
                     Hack2.Contrib.Middleware.Inspect
                     Hack2.Contrib.Middleware.NotFound
-                    Hack2.Contrib.Middleware.RegexpRouter
-                    -- Hack2.Contrib.Middleware.ShowExceptions
                     Hack2.Contrib.Middleware.SimpleAccessLogger
-                    -- Hack2.Contrib.Middleware.Hub
                     Hack2.Contrib.Middleware.Static
                     Hack2.Contrib.Middleware.URLMap
-                    Hack2.Contrib.Middleware.IOConfig
                     Hack2.Contrib.Middleware.UserMime
-                    -- Hack2.Contrib.Middleware.UTF8Body
-                    Hack2.Contrib.Middleware.Cascade
                     Hack2.Contrib.Middleware.XForwardedForToRemoteHost
                     Hack2.Contrib.Mime
                     Hack2.Contrib.Request
                     Hack2.Contrib.Response
                     Hack2.Contrib.Utils
-                    Hack2.Contrib.AirBackports
+
 
 
 

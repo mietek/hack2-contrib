@@ -6,9 +6,8 @@ import Data.Time.Clock.POSIX
 import System.Directory
 import System.IO
 import System.Locale (defaultTimeLocale)
-import System.Time
 import qualified System.IO.Unsafe as Unsafe
-import Text.RegexPR
+
 import Data.Maybe
 
 import Air.Env hiding (Default, def)
@@ -41,7 +40,7 @@ simple_time_format = "%Y-%m-%d %H:%M:%S %Z"
 parse_time :: String -> String -> UTCTime
 parse_time = readTime defaultTimeLocale
 
-
+{-
 split_raw :: String -> String -> [String]
 split_raw re xs
   | xs.match re .isJust = splitRegexPR re xs
@@ -70,6 +69,6 @@ strip s = s.sub "^\\s*" "" .reverse .sub "^\\s*" "" .reverse
 
 empty :: String -> Bool
 empty s = case s.match("\\S") of
-  Just _ -> False
-  Nothing -> True
-  
+ Just _ -> False
+ Nothing -> True
+-}

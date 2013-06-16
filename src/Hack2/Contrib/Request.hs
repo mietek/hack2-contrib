@@ -14,6 +14,8 @@ import Network.CGI.Protocol
 import Prelude ()
 import qualified Data.ByteString.Char8 as B
 import Hack2.Contrib.AirBackports
+import Data.List (all)
+import Data.Char (isSpace)
 
 
 input_bytestring :: Env -> IO ByteString
@@ -31,10 +33,12 @@ path env = env.script_name + env.path_info
 content_type :: Env -> ByteString
 content_type env = env.httpHeaders.get _ContentType .fromMaybe ""
 
+{-
 media_type :: Env -> ByteString
 media_type env = case env.content_type.B.unpack.split "\\s*[;,]\\s*" of
   [] -> ""
   x:_ -> x.lower.B.pack
+
 
 
 media_type_params :: Env -> [(ByteString, ByteString)]
@@ -52,16 +56,18 @@ media_type_params env
         .map_fst (lower > B.pack)
         .map_snd (B.pack)
 
+
 content_charset :: Env -> ByteString
 content_charset env = env.media_type_params.lookup "charset" .fromMaybe ""
+-}
 
 host :: Env -> ByteString
-host env = env.httpHeaders.get _Host .fromMaybe (env.server_name) .B.unpack.gsub ":\\d+\\z" "" .B.pack
+host env = env.httpHeaders.get _Host .fromMaybe (env.server_name) .as_string (takeWhile (is_not ':'))
 
 
 params :: Env -> [(ByteString, ByteString)]
 params env =
-  if env.query_string.B.unpack.empty
+  if env.query_string.B.unpack.all isSpace
     then []
     else env.query_string.B.unpack.formDecode.map_both B.pack
 
@@ -71,7 +77,7 @@ inputs env = do
   return - 
     env
       .httpHeaders
-      .map_fst (B.unpack > upper > gsub "-" "_") -- cgi env use all cap letters
+      .map_fst (B.unpack > upper > map (\x -> if x == '-' then '_' else x)) -- cgi env use all cap letters
       .map_snd B.unpack
       .(("REQUEST_METHOD", env.request_method.show) : ) -- for cgi request
       .flip decodeInput (_body.s2l)
@@ -96,7 +102,7 @@ cookies env = case env.httpHeaders.get _Cookie of
 
 fullpath :: Env -> ByteString
 fullpath env = 
-  if env.query_string.B.unpack.empty 
+  if env.query_string.B.unpack.all isSpace 
     then env.path 
     else env.path + "?" + env.query_string
 
