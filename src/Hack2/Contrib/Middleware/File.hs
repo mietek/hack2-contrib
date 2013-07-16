@@ -4,7 +4,7 @@
 -- | Stolen from rack: serves files below the +root+ given, according to the 
 --   path info of the Rack request.
 
-module Hack2.Contrib.Middleware.File (file) where
+module Hack2.Contrib.Middleware.File (file, serve) where
 
 import Data.Default
 import Data.List (isInfixOf)
