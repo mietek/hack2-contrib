@@ -69,7 +69,7 @@ params :: Env -> [(ByteString, ByteString)]
 params env =
   if env.query_string.B.unpack.all isSpace
     then []
-    else env.query_string.B.unpack.formDecode.map_both B.pack
+    else env.query_string.B.unpack.formDecode.map_both (u2b > B.pack)
 
 inputs :: Env -> IO [(ByteString, ByteString)]
 inputs env = do
