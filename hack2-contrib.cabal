@@ -1,5 +1,5 @@
 Name:                 hack2-contrib
-Version:              2013.7.17
+Version:              2013.7.18
 Build-type:           Simple
 Synopsis:             Hack2 contrib
 Description:          Common middlewares and utilities for Hack2
@@ -27,7 +27,7 @@ library
                   , bytestring
                   , data-default
                   , time
-                  , air >= 2013.6.22
+                  , air >= 2013.7.18
                   , hack2
                   , utf8-string
                   
