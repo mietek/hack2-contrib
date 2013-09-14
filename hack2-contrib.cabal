@@ -1,5 +1,5 @@
 Name:                 hack2-contrib
-Version:              2013.7.18
+Version:              2013.9.15
 Build-type:           Simple
 Synopsis:             Hack2 contrib
 Description:          Common middlewares and utilities for Hack2
@@ -16,7 +16,7 @@ tested-with:          GHC==7.6.3
 
 library
 
-  build-depends: 
+  build-depends:
                     base >=4 && < 100
                   , cgi
                   , network
@@ -29,12 +29,12 @@ library
                   , time
                   , air >= 2013.7.18
                   , hack2
-                  , utf8-string
-                  
+                  , text
+
   hs-source-dirs: src/
-  
-  exposed-modules:  
-                    
+
+  exposed-modules:
+
                     Hack2.Contrib.AirBackports
                     Hack2.Contrib.Constants
                     Hack2.Contrib.Middleware.BounceFavicon
