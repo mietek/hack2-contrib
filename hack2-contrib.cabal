@@ -1,5 +1,5 @@
 Name:                 hack2-contrib
-Version:              2014.4.14
+Version:              2014.5.19
 Build-type:           Simple
 Synopsis:             Hack2 contrib
 Description:          Common middlewares and utilities for Hack2
@@ -18,7 +18,6 @@ library
 
   build-depends:
                     base >=4 && < 100
-                  , cgi
                   , network
                   , old-locale
                   , directory
@@ -58,8 +57,3 @@ library
                     Hack2.Contrib.Request
                     Hack2.Contrib.Response
                     Hack2.Contrib.Utils
-
-
-
-
-
