@@ -15,7 +15,9 @@ import Hack2.Contrib.AirBackports
 import Data.List (all)
 import Data.Char (isSpace)
 import Data.Text (Text, splitOn)
+import qualified Data.Text as T
 import Data.Text.Encoding (decodeUtf8, encodeUtf8)
+import Network.URI (unEscapeString)
 
 
 input_bytestring :: Env -> IO ByteString
@@ -69,7 +71,7 @@ params :: Env -> [(ByteString, ByteString)]
 params env =
   if env.query_string.B.unpack.all isSpace
     then []
-    else env.query_string.decodeUtf8.decode_params.map_both encodeUtf8
+    else env.query_string.decodeUtf8.decode_params.map_both (T.unpack > unEscapeString > u2b > B.pack)
   where
     decode_params :: Text -> [(Text, Text)]
     decode_params x =
