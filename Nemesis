@@ -1,7 +1,6 @@
 import System.Nemesis.Env
 import Air.Env
 import Prelude ()
-import System.Nemesis.Titan
 
 main = run - do
   
@@ -33,6 +32,4 @@ main = run - do
   task "stat" - do
     sh "cloc -match-f=hs$ --quiet src --no3"
     
-  titan "Hack2/Contrib/Test.hs"
   
-  task "t:Test/titan" - return ()
