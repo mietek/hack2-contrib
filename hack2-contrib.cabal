@@ -14,11 +14,14 @@ homepage:             https://github.com/nfjinjing/hack2-contrib
 data-files:           readme.md, changelog.md
 tested-with:          GHC==7.6.3
 
+flag network-uri
+  description: Get Network.URI from the network-uri package
+  default: True
+
 library
 
   build-depends:
                     base >=4 && < 100
-                  , network
                   , old-locale
                   , directory
                   , filepath
@@ -29,6 +32,11 @@ library
                   , air >= 2013.7.18
                   , hack2
                   , text
+
+  if flag(network-uri)
+    build-depends: network-uri >= 2.6
+  else
+    build-depends: network < 2.6
 
   hs-source-dirs: src/
 
